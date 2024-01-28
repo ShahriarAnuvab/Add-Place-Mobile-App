@@ -1,15 +1,26 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Button,
+  ScrollView,
+} from "react-native";
+import Place from "./components/Place";
 
 export default function App() {
   const [inputValue, setInputValue] = useState("");
   const [places, setPlaces] = useState([]);
   const placeList = places.map((item, index) => {
     return (
-      <Text key={index}>
-        {index + 1}. {item}
-      </Text>
+      <Place
+        placeName={item}
+        key={index}
+        index={index}
+        onPress={() => alert(item)}
+      />
     );
   });
   return (
@@ -39,7 +50,7 @@ export default function App() {
           }}
         />
       </View>
-      <View>{placeList}</View>
+      <ScrollView style={{ width: "100%" }}>{placeList}</ScrollView>
     </View>
   );
 }
